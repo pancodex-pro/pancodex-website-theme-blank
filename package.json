@@ -1,0 +1,54 @@
+{
+  "name": "@pancodex/pancodex-website-theme-blank",
+  "version": "1.0.0",
+  "description": "Pancodex Website Blank Theme",
+  "author": "Oleksandr Pustovalov <apustovalov@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "serv": "del ./dist && node ./server.js"
+  },
+  "main": "lib/index.js",
+  "module": "lib/index.js",
+  "types": "lib/types",
+  "devDependencies": {
+    "@headlessui/react": "1.6.6",
+    "@rollup/plugin-commonjs": "22.0.1",
+    "@rollup/plugin-image": "2.1.1",
+    "@rollup/plugin-json": "4.1.0",
+    "@rollup/plugin-node-resolve": "13.3.0",
+    "@types/lodash": "4.14.182",
+    "@types/react": "18.0.15",
+    "autoprefixer": "10.4.7",
+    "cors": "2.8.5",
+    "cssnano": "5.1.12",
+    "del-cli": "4.0.1",
+    "dotenv": "16.0.1",
+    "express": "4.18.1",
+    "lodash": "4.17.21",
+    "postcss": "8.4.14",
+    "postcss-cli": "10.0.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "rollup": "2.76.0",
+    "rollup-plugin-external-globals": "0.6.1",
+    "rollup-plugin-styles": "4.0.0",
+    "rollup-plugin-terser": "7.0.2",
+    "rollup-plugin-typescript2": "0.32.1",
+    "socket.io": "4.5.1",
+    "tailwindcss": "3.1.5",
+    "typescript": "4.7.4"
+  },
+  "peerDependencies": {
+    "@headlessui/react": "1.6.6",
+    "react": ">=18.0",
+    "react-dom": ">=18.0"
+  },
+  "dependencies": {
+    "@pancodex/pancodex-website-api": "link:../pancodex-website-api",
+    "fs-extra": "^10.1.0",
+    "request": "^2.88.2",
+    "tar-fs": "^2.1.1",
+    "zlib": "^1.0.5"
+  }
+}
