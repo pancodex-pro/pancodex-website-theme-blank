@@ -19,7 +19,8 @@ const inputOptions = {
     'lodash/unionWith',
     'lodash/isEqual',
     '@headlessui/react',
-    '@pancodex/pancodex-website-api',
+    '@pancodex/bridge',
+    '@pancodex/platform',
     'react',
     'react-dom',
   ],
@@ -35,7 +36,8 @@ const inputOptions = {
     }),
     externalGlobals({
       '@headlessui/react': 'headlessuiReact',
-      '@pancodex/pancodex-website-api': 'pancodexApi',
+      '@pancodex/bridge': 'pancodexBridge',
+      '@pancodex/platform': 'pancodexPlatform',
       react: 'React',
       'react-dom': 'ReactDOM'
     }),

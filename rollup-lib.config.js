@@ -13,7 +13,7 @@ const config = {
       format: 'es',
       assetFileNames: '[name][extname]',
       paths: {
-        '@pancodex/pancodex-website-api': 'api'
+        '@pancodex/platform': 'platform',
       }
     },
   ],
@@ -30,7 +30,8 @@ const config = {
     'react',
     'react-dom',
     '@headlessui/react',
-    '@pancodex/pancodex-website-api'
+    '@pancodex/bridge',
+    '@pancodex/platform'
   ],
   plugins: [
     json(),
