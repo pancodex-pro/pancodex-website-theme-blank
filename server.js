@@ -4,10 +4,11 @@ const cors = require('cors');
 const path = require('path');
 const http = require('http');
 const socketIO = require('socket.io');
+const {formatISO} = require('date-fns');
 const rollupUmdApi = require('./rollup-umd-api');
 const rollupLibApi = require('./rollup-lib-api');
-const {packTarGz, deleteFile} = require("./fileUtils");
-const {post, upload} = require("./clientUtils");
+const {readAllFilesInDir} = require("./fileUtils");
+const {getBranch, createTree, createCommit, waitForBranchUpdatedWithCommit, getBranchTree} = require("./githubUtils");
 
 require('dotenv').config({path: path.resolve(process.cwd(), '.env')})
 
@@ -53,7 +54,6 @@ process.on('exit', function () {
 
 const port = 7373;
 const socketPort = 7474;
-const serviceURL = "";
 
 const app = express();
 
@@ -72,61 +72,95 @@ io.on("connection", (socket) => {
         console.log("Client is disconnected: ", reason);
         delete clientSockets[socket.id];
     });
-    socket.emit("hello", "Theme SDK server is connected.");
+    socket.emit("hello", "Pancodex theme SDK server is connected.");
     socket.on('upload_skin', (message) => {
         const {
-            token,
-            skinName,
-            skinDescription
+            ownerLogin,
+            installationToken,
+            repoName,
+            workingBranch,
+            userName,
+            email
         } = message;
-        const distFilePath = path.join(__dirname, 'dist.tar.gz');
-        const libFilePath = path.join(__dirname, 'lib.tar.gz')
+        console.log('Building theme library...', message);
         rollupLibApi.build()
             .then(() => {
-                console.log('Building theme package...');
-                return packTarGz(path.join(__dirname, 'dist'), distFilePath)
-                    .then(() => {
-                        return packTarGz(path.join(__dirname, 'lib'), libFilePath);
+                return getBranch(ownerLogin, installationToken, repoName, workingBranch, true);
+            })
+            .then((branchData) => {
+                return getBranchTree(ownerLogin, installationToken, repoName, branchData.commit.sha, true)
+                    .then((branchTreeData) => {
+                        const libFilesIndex = {};
+                        branchTreeData.tree.forEach((branchTreeItem) => {
+                            if (branchTreeItem.path.startsWith('src/theme') && branchTreeItem.type === 'blob') {
+                                libFilesIndex[branchTreeItem.path] = true;
+                            }
+                        });
+                        return libFilesIndex;
                     });
             })
-            .then(() => {
-                console.log('Creating new theme in the system...');
-                return post(`${serviceURL}/skin-add-submit`, token, {
-                  name: skinName,
-                  description: skinDescription,
-                  category: 'Probe Category'
-                });
-            })
-            .then((newSkin) => {
-                if (newSkin) {
-                    console.log('Uploading new theme to the system...');
-                    return upload(
-                        `${serviceURL}/skin-upload`,
-                        token,
-                        {
-                            'lib': libFilePath,
-                            'dist': distFilePath
-                        },
-                        {skinId: newSkin.id}
-                    )
-                        .then(() => {
-                            socket.emit('skin_uploading_success', newSkin);
-                            console.log(`New theme ${newSkin.name} has been successfully created.`);
-                        })
-                        .catch(error => {
-                            return post(`${serviceURL}/skin-add-revert?skinId=${newSkin.id}`, token, {})
-                                .then(() => {
-                                    console.error(`ERROR: ${error}`);
-                                    socket.emit('skin_uploading_error', error);
-                                })
-                                .catch(error1 => {
-                                    console.error(`ERROR: ${error1}`);
-                                });
+            .then((libFilesIndex) => {
+                const newTreeItems = [];
+                const libDirPath = path.join(__dirname, 'lib');
+                const libFiles = readAllFilesInDir(libDirPath);
+                if (libFiles && libFiles.length > 0) {
+                    let newLibFilePath;
+                    const libDirPathPrefix = `${libDirPath}/`;
+                    libFiles.forEach(fileItem => {
+                        newLibFilePath = `src/theme/${fileItem.filePath.replace(libDirPathPrefix, '')}` ;
+                        delete libFilesIndex[newLibFilePath];
+                        newTreeItems.push({
+                            path: newLibFilePath,
+                            mode: '100644',
+                            type: 'blob',
+                            content: fileItem.fileData
                         });
-                } else {
-                    console.error(`ERROR: Error creating new theme - missing theme ID.`);
-                    socket.emit('skin_uploading_error', 'Error creating new theme: missing theme ID.');
+                    });
                 }
+                Object.keys(libFilesIndex).forEach(libFileKey => {
+                    newTreeItems.push({
+                        path: libFileKey,
+                        mode: '100644',
+                        type: 'blob',
+                        sha: null
+                    });
+                });
+                const distFiles = readAllFilesInDir(path.join(__dirname, 'dist'));
+                if (distFiles && distFiles.length > 0) {
+                    distFiles.forEach(fileItem => {
+                        newTreeItems.push({
+                            path: `pancodex/${fileItem.fileName}`,
+                            mode: '100644',
+                            type: 'blob',
+                            content: fileItem.fileData
+                        });
+                    });
+                }
+                return getBranch(ownerLogin, installationToken, repoName, workingBranch)
+                    .then((branchData) => {
+                        return createTree(ownerLogin, installationToken, repoName, branchData.commit.sha, newTreeItems)
+                            .then((newTree) => {
+                                return createCommit(
+                                    ownerLogin,
+                                    installationToken,
+                                    repoName,
+                                    workingBranch,
+                                    branchData.commit.sha,
+                                    newTree.sha,
+                                    {
+                                        name: userName,
+                                        email,
+                                        date: formatISO(Date.now())
+                                    },
+                                    'Update theme preview library'
+                                );
+                            }).then((newCommit) => {
+                                return waitForBranchUpdatedWithCommit(ownerLogin, installationToken, repoName, workingBranch, newCommit.sha);
+                            });
+                    })
+                    .then(() => {
+                        socket.emit('skin_uploading_success', 'OK');
+                    });
             })
             .catch(error => {
                 if (_.isString(error)) {
@@ -139,10 +173,6 @@ io.on("connection", (socket) => {
                     socket.emit('skin_uploading_error', JSON.stringify(error));
                     console.error(`ERROR: ${JSON.stringify(error)}`);
                 }
-            })
-            .finally(() => {
-                deleteFile(libFilePath);
-                deleteFile(distFilePath);
             });
     });
 });
@@ -173,6 +203,6 @@ app.use('/dist', express.static(path.join(__dirname, 'dist')));
 httpServer.listen(socketPort);
 
 app.listen(port, () => {
-    console.info('Theme SDK server started on port: ' + port);
+    console.info('Pancodex theme SDK server started on port: ' + port);
     console.info('Socket port: ' + socketPort);
 });

@@ -1,22 +1,23 @@
 const fs = require('fs-extra');
 const path = require('path');
-const tar = require('tar-fs');
-const zlib = require('zlib');
+const klawSync = require('klaw-sync');
 
-function packTarGz (srcDirPath, destFilePath) {
-    return new Promise((resolve, reject) => {
-        let destFile = fs.createWriteStream(destFilePath);
-        tar.pack(srcDirPath).pipe(zlib.createGzip()).pipe(destFile)
-            .on('finish', () => { resolve(); })
-            .on('error', err => { reject(err); });
-    });
-}
-
-function deleteFile(filePath) {
-    fs.removeSync(filePath);
+function readAllFilesInDir(dirPath) {
+    const resultList = [];
+    const fileList = klawSync(dirPath, {nodir: true});
+    if (fileList && fileList.length > 0) {
+        fileList.forEach((fileItem) => {
+            const {path: filePath} = fileItem;
+            resultList.push({
+                filePath,
+                fileName: path.basename(filePath),
+                fileData: fs.readFileSync(filePath, {encoding: 'utf8'})
+            });
+        });
+    }
+    return resultList;
 }
 
 module.exports = {
-    packTarGz,
-    deleteFile
+    readAllFilesInDir
 };

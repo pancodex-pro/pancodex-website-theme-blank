@@ -22,7 +22,7 @@ export function RootPage() {
 
         return (
             <div>
-                <p className="p-4 font-bold bg-blue-600 text-blue-100 font-light">{title}</p>
+                <p className="p-2 font-medium bg-blue-600 text-yellow-200 rounded-md">{title}</p>
                 <div className="p-4 flex flex-row">
                     {topLevelNavigation.map((menuItem: NavigationItem) => {
                         return (
