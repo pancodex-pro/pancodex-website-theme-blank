@@ -6,52 +6,40 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "serv": "del ./dist && node ./server.js"
+    "serv": "del ./dist && node ./server.js",
+    "scaffold": "ts-node ./scaffolding/generate.ts"
   },
   "main": "lib/index.js",
   "module": "lib/index.js",
   "types": "lib/types",
   "devDependencies": {
     "@headlessui/react": "1.6.6",
-    "@rollup/plugin-commonjs": "24.0.0",
-    "@rollup/plugin-image": "3.0.1",
-    "@rollup/plugin-json": "6.0.0",
-    "@rollup/plugin-node-resolve": "15.0.1",
+    "@pancodex/bridge-lib": "link:../pancodex-libs/packages/bridge-lib",
+    "@pancodex/domain-lib": "link:../pancodex-libs/packages/domain-lib",
+    "@pancodex/platform-lib": "link:../pancodex-libs/packages/platform-lib",
+    "@pancodex/sdk-lib": "link:../pancodex-libs/packages/sdk-lib",
     "@tailwindcss/typography": "^0.5.8",
     "@types/lodash": "4.14.182",
+    "@types/node": "^18.14.0",
     "@types/react": "18.0.15",
     "autoprefixer": "10.4.7",
-    "cors": "2.8.5",
     "cssnano": "5.1.12",
     "del-cli": "4.0.1",
-    "dotenv": "16.0.1",
-    "express": "4.18.1",
     "lodash": "4.17.21",
     "postcss": "8.4.14",
     "postcss-cli": "10.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "rollup": "3.9.0",
-    "rollup-plugin-external-globals": "0.7.1",
-    "rollup-plugin-styles": "4.0.0",
-    "rollup-plugin-terser": "7.0.2",
-    "rollup-plugin-typescript2": "0.34.1",
-    "socket.io": "4.5.1",
     "tailwindcss": "3.1.5",
-    "typescript": "4.7.4"
+    "ts-node": "^10.9.1",
+    "typescript": "4.9.5"
   },
   "peerDependencies": {
-    "@headlessui/react": "1.6.6",
+    "@headlessui/react": ">=1.6",
     "react": ">=18.0",
-    "react-dom": ">=18.0"
-  },
-  "dependencies": {
-    "@pancodex/bridge": "link:../pancodex-libs/packages/bridge",
-    "@pancodex/platform": "link:../pancodex-libs/packages/platform",
-    "date-fns": "2.29.3",
-    "fs-extra": "11.1.0",
-    "klaw-sync": "6.0.0",
-    "octokit": "2.0.11",
-    "request": "2.88.2"
+    "react-dom": ">=18.0",
+    "@pancodex/bridge-lib": ">=1.0",
+    "@pancodex/domain-lib": ">=1.0",
+    "@pancodex/platform-lib": ">=1.0"
   }
 }

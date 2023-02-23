@@ -30,5 +30,10 @@
     "**/__tests__",
     "**/*.test.ts",
     "**/*.test.js",
-  ]
+  ],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs"
+    }
+  }
 }
