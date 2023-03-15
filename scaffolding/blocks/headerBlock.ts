@@ -1,17 +1,17 @@
 import {BlockConfig} from '@pancodex/sdk-lib';
-import {StringSelectsKeys, TextConstantsKeys} from '../keyValues';
 
-export const headerBlock: BlockConfig<StringSelectsKeys, TextConstantsKeys> = {
+export const headerBlock: BlockConfig = {
+    isDefault: true,
     description: 'A simple text header',
-        components: {
+    components: {
         headerComponent: {
             indexNumber: 0,
-                label: 'Header',
-                props: {
+            label: 'Header',
+            props: {
                 text: {
                     indexNumber: 0,
-                        type: 'HeaderText',
-                        fieldContent: {
+                    type: 'HeaderText',
+                    fieldContent: {
                         htmlText: '<h1>Type the header here...</h1>'
                     }
                 }

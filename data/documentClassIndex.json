@@ -1,0 +1,554 @@
+{
+  "BlogGroupPage": {
+    "type": "page",
+    "label": "Blog Group",
+    "defaultTitle": "Blog Group",
+    "defaultSlug": "blog-group",
+    "description": "Blog Group 2 page may serve a landing page for the group of some blog posts",
+    "dataFields": {
+      "description": {
+        "label": "Page Description",
+        "indexNumber": 0,
+        "dataType": "string",
+        "inputType": "text",
+        "defaultValue": "Some page description"
+      },
+      "robots": {
+        "label": "Meta Robots",
+        "indexNumber": 1,
+        "dataType": "string",
+        "inputType": "select",
+        "defaultValue": "index",
+        "variants": [
+          {
+            "label": "Do not index page",
+            "value": "noindex"
+          },
+          {
+            "label": "Do index page",
+            "value": "index"
+          }
+        ]
+      },
+      "follow": {
+        "label": "Meta Follow",
+        "indexNumber": 2,
+        "dataType": "string",
+        "inputType": "select",
+        "defaultValue": "follow",
+        "variants": [
+          {
+            "label": "Do not follow page",
+            "value": "nofollow",
+            "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1\" stroke=\"currentColor\">    <path stroke-linecap=\"round\" stroke-linejoin=\"round\"          d=\"M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z\"/></svg>"
+          },
+          {
+            "label": "Do follow page",
+            "value": "follow"
+          }
+        ]
+      },
+      "twitterImage": {
+        "label": "Twitter card image (small)",
+        "indexNumber": 0,
+        "dataType": "string",
+        "inputType": "image",
+        "defaultValue": ""
+      }
+    },
+    "documentAreas": {
+      "linkBlocks": {
+        "label": "Link View",
+        "indexNumber": 0,
+        "blocks": {
+          "navigationEntryBlock": {
+            "description": "A menu option layout to display the page's link somewhere in the navigation",
+            "components": {
+              "entryDisplay": {
+                "indexNumber": 0,
+                "label": "Navigation Entry Display",
+                "props": {
+                  "image": {
+                    "indexNumber": 1,
+                    "label": "Entry Image",
+                    "type": "Image",
+                    "fieldContent": {
+                      "src": "",
+                      "alt": "",
+                      "width": 0,
+                      "height": 0
+                    }
+                  },
+                  "title": {
+                    "indexNumber": 0,
+                    "label": "Entry Title",
+                    "type": "HeaderText",
+                    "fieldContent": {
+                      "htmlText": "<h1>Entry Title</h1>"
+                    }
+                  },
+                  "text": {
+                    "indexNumber": 2,
+                    "label": "Entry Text",
+                    "type": "ParagraphText",
+                    "fieldContent": {
+                      "htmlText": "<p>Some text to describe the entry</p>"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "cardBlocks": {
+        "label": "Card View",
+        "indexNumber": 1,
+        "blocks": {
+          "thumbnailCardBlock": {
+            "isDefault": true,
+            "description": "A card layout to display the page's thumbnail",
+            "components": {
+              "thumbnailCardComponent": {
+                "indexNumber": 0,
+                "label": "Thumbnail Card",
+                "props": {
+                  "image": {
+                    "indexNumber": 0,
+                    "label": "Card Image",
+                    "type": "Image",
+                    "fieldContent": {
+                      "src": "",
+                      "alt": "",
+                      "width": 0,
+                      "height": 0
+                    }
+                  },
+                  "title": {
+                    "indexNumber": 1,
+                    "label": "Card Title",
+                    "type": "HeaderText",
+                    "fieldContent": {
+                      "htmlText": "<h1>Card Title</h1>"
+                    }
+                  },
+                  "text": {
+                    "indexNumber": 2,
+                    "label": "Card Text",
+                    "type": "ParagraphText",
+                    "fieldContent": {
+                      "htmlText": "<h1>Card Title</h1>"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "bodyBlocks": {
+        "label": "Body View",
+        "indexNumber": 2,
+        "blocks": {
+          "headerBlock": {
+            "isDefault": true,
+            "description": "A simple text header",
+            "components": {
+              "headerComponent": {
+                "indexNumber": 0,
+                "label": "Header",
+                "props": {
+                  "text": {
+                    "indexNumber": 0,
+                    "type": "HeaderText",
+                    "fieldContent": {
+                      "htmlText": "<h1>Type the header here...</h1>"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "paragraphBlock": {
+            "description": "A simple text paragraph",
+            "components": {
+              "paragraphComponent": {
+                "indexNumber": 0,
+                "label": "Paragraph",
+                "props": {
+                  "text": {
+                    "indexNumber": 0,
+                    "type": "ParagraphText",
+                    "fieldContent": {
+                      "htmlText": "<p>Type the header here...</p>"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "childrenListingBlock": {
+            "isDefault": false,
+            "description": "List children of the selected parent",
+            "components": {
+              "childrenListingComponent": {
+                "indexNumber": 0,
+                "label": "List all children of the selected parents",
+                "props": {
+                  "list": {
+                    "indexNumber": 0,
+                    "type": "DocumentsList",
+                    "fieldContent": {
+                      "selectionMode": "selectChildrenDocuments"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "galleryBlock": {
+            "isDefault": false,
+            "description": "Gallery of selected documents",
+            "components": {
+              "childrenListingComponent": {
+                "indexNumber": 0,
+                "label": "List all selected documents in the gallery",
+                "isArray": true,
+                "props": {
+                  "list": {
+                    "indexNumber": 0,
+                    "type": "DocumentsList",
+                    "fieldContent": {
+                      "selectionMode": "selectDocuments"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "commonAreas": {}
+  },
+  "MainPage": {
+    "type": "main_page",
+    "label": "Main Page",
+    "defaultTitle": "Home",
+    "defaultSlug": "home",
+    "description": "Home page template for your site",
+    "dataFields": {
+      "description": {
+        "label": "Page Description",
+        "indexNumber": 0,
+        "dataType": "string",
+        "inputType": "text",
+        "defaultValue": "Some page description"
+      },
+      "robots": {
+        "label": "Meta Robots",
+        "indexNumber": 1,
+        "dataType": "string",
+        "inputType": "select",
+        "defaultValue": "index",
+        "variants": [
+          {
+            "label": "Do not index page",
+            "value": "noindex"
+          },
+          {
+            "label": "Do index page",
+            "value": "index"
+          }
+        ]
+      },
+      "follow": {
+        "label": "Meta Follow",
+        "indexNumber": 2,
+        "dataType": "string",
+        "inputType": "select",
+        "defaultValue": "follow",
+        "variants": [
+          {
+            "label": "Do not follow page",
+            "value": "nofollow",
+            "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1\" stroke=\"currentColor\">    <path stroke-linecap=\"round\" stroke-linejoin=\"round\"          d=\"M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z\"/></svg>"
+          },
+          {
+            "label": "Do follow page",
+            "value": "follow"
+          }
+        ]
+      }
+    },
+    "documentAreas": {
+      "linkBlocks": {
+        "label": "Link View",
+        "indexNumber": 0,
+        "blocks": {
+          "navigationEntryBlock": {
+            "description": "A menu option layout to display the page's link somewhere in the navigation",
+            "components": {
+              "entryDisplay": {
+                "indexNumber": 0,
+                "label": "Navigation Entry Display",
+                "props": {
+                  "image": {
+                    "indexNumber": 1,
+                    "label": "Entry Image",
+                    "type": "Image",
+                    "fieldContent": {
+                      "src": "",
+                      "alt": "",
+                      "width": 0,
+                      "height": 0
+                    }
+                  },
+                  "title": {
+                    "indexNumber": 0,
+                    "label": "Entry Title",
+                    "type": "HeaderText",
+                    "fieldContent": {
+                      "htmlText": "<h1>Entry Title</h1>"
+                    }
+                  },
+                  "text": {
+                    "indexNumber": 2,
+                    "label": "Entry Text",
+                    "type": "ParagraphText",
+                    "fieldContent": {
+                      "htmlText": "<p>Some text to describe the entry</p>"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "cardBlocks": {
+        "label": "Card View",
+        "indexNumber": 1,
+        "blocks": {
+          "thumbnailCardBlock": {
+            "isDefault": true,
+            "description": "A card layout to display the page's thumbnail",
+            "components": {
+              "thumbnailCardComponent": {
+                "indexNumber": 0,
+                "label": "Thumbnail Card",
+                "props": {
+                  "image": {
+                    "indexNumber": 0,
+                    "label": "Card Image",
+                    "type": "Image",
+                    "fieldContent": {
+                      "src": "",
+                      "alt": "",
+                      "width": 0,
+                      "height": 0
+                    }
+                  },
+                  "title": {
+                    "indexNumber": 1,
+                    "label": "Card Title",
+                    "type": "HeaderText",
+                    "fieldContent": {
+                      "htmlText": "<h1>Card Title</h1>"
+                    }
+                  },
+                  "text": {
+                    "indexNumber": 2,
+                    "label": "Card Text",
+                    "type": "ParagraphText",
+                    "fieldContent": {
+                      "htmlText": "<h1>Card Title</h1>"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "bodyBlocks": {
+        "label": "Body View",
+        "indexNumber": 2,
+        "blocks": {
+          "mainPageHeroBlock": {
+            "description": "Representative section of the page with background image and multiple call to action buttons.",
+            "isDefault": true,
+            "components": {
+              "heroHeader": {
+                "indexNumber": 0,
+                "label": "Hero Header",
+                "props": {
+                  "text": {
+                    "indexNumber": 0,
+                    "type": "HeaderText",
+                    "fieldContent": {
+                      "htmlText": "<h1>The hero stunning text...</h1>"
+                    }
+                  }
+                }
+              },
+              "heroText": {
+                "indexNumber": 1,
+                "label": "Hero Subheader",
+                "props": {
+                  "text": {
+                    "indexNumber": 0,
+                    "type": "ParagraphText",
+                    "fieldContent": {
+                      "htmlText": "<p>Some short description...</p>"
+                    }
+                  }
+                }
+              },
+              "heroImage": {
+                "indexNumber": 2,
+                "label": "Hero Image",
+                "props": {
+                  "image": {
+                    "indexNumber": 0,
+                    "type": "Image",
+                    "fieldContent": {}
+                  }
+                }
+              },
+              "heroCta": {
+                "indexNumber": 3,
+                "label": "Links for call to actions",
+                "isArray": true,
+                "props": {
+                  "icon": {
+                    "indexNumber": 0,
+                    "type": "Icon",
+                    "label": "Icon",
+                    "fieldContent": {},
+                    "fieldContentVariants": [
+                      {
+                        "label": "01",
+                        "fieldContent": {
+                          "iconName": "icon_1",
+                          "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" className=\"bi bi-circle\" viewBox=\"0 0 16 16\">                                \n<path d=\"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z\"/>                          \n</svg>"
+                        }
+                      },
+                      {
+                        "label": "02",
+                        "fieldContent": {
+                          "iconName": "icon_2",
+                          "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-clipboard-minus-fill\" viewBox=\"0 0 16 16\">\n  <path d=\"M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Z\"/>\n  <path d=\"M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5v-1ZM6 9h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1 0-1Z\"/>\n</svg>"
+                        }
+                      }
+                    ]
+                  },
+                  "label": {
+                    "indexNumber": 1,
+                    "type": "StringValue",
+                    "label": "Label",
+                    "fieldContent": {
+                      "value": "Buy"
+                    },
+                    "fieldContentVariants": [
+                      {
+                        "label": "Buy",
+                        "fieldContent": {
+                          "value": "Buy"
+                        }
+                      },
+                      {
+                        "label": "Sell",
+                        "fieldContent": {
+                          "value": "Sell"
+                        }
+                      }
+                    ]
+                  },
+                  "link": {
+                    "indexNumber": 2,
+                    "type": "Link",
+                    "label": "Action Link",
+                    "fieldContent": {
+                      "target": "_self"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "headerBlock": {
+            "isDefault": true,
+            "description": "A simple text header",
+            "components": {
+              "headerComponent": {
+                "indexNumber": 0,
+                "label": "Header",
+                "props": {
+                  "text": {
+                    "indexNumber": 0,
+                    "type": "HeaderText",
+                    "fieldContent": {
+                      "htmlText": "<h1>Type the header here...</h1>"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "paragraphBlock": {
+            "description": "A simple text paragraph",
+            "components": {
+              "paragraphComponent": {
+                "indexNumber": 0,
+                "label": "Paragraph",
+                "props": {
+                  "text": {
+                    "indexNumber": 0,
+                    "type": "ParagraphText",
+                    "fieldContent": {
+                      "htmlText": "<p>Type the header here...</p>"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "chapterBlock": {
+            "description": "A chapter of the article with header and paragraphs",
+            "components": {
+              "headerComponent": {
+                "indexNumber": 0,
+                "label": "Chapter Header",
+                "props": {
+                  "text": {
+                    "indexNumber": 0,
+                    "type": "HeaderText",
+                    "fieldContent": {
+                      "htmlText": "<h1>Chapter Name</h1>"
+                    }
+                  }
+                }
+              },
+              "paragraphComponent": {
+                "indexNumber": 1,
+                "label": "Chapter Paragraphs",
+                "isArray": true,
+                "props": {
+                  "text": {
+                    "indexNumber": 0,
+                    "type": "ParagraphText",
+                    "fieldContent": {
+                      "htmlText": "<p>Some chapter paragraph....</p>"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "commonAreas": {}
+  }
+}

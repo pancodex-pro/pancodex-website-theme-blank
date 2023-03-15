@@ -1,7 +1,6 @@
 import {BlockConfig} from '@pancodex/sdk-lib';
-import {StringSelectsKeys, TextConstantsKeys} from '../keyValues';
 
-export const navigationEntryBlock: BlockConfig<StringSelectsKeys, TextConstantsKeys> = {
+export const navigationEntryBlock: BlockConfig = {
     description: 'A menu option layout to display the page\'s link somewhere in the navigation',
     components: {
         entryDisplay: {

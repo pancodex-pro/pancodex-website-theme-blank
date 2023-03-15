@@ -5,23 +5,46 @@ import {mainPageHeroBlock} from '../blocks/mainPageHeroBlock';
 import {headerBlock} from '../blocks/headerBlock';
 import {paragraphBlock} from '../blocks/paragraphBlock';
 import {chapterBlock} from '../blocks/chapterBlock';
-import {metaDataBlock} from '../blocks/metaDataBlock';
-import {StringSelectsKeys, TextConstantsKeys} from '../keyValues';
+import {description, robots, follow} from '../dataFields';
 
-export const MainPage: DocumentConfig<StringSelectsKeys, TextConstantsKeys> = {
+export const MainPage: DocumentConfig = {
     type: 'main_page',
+    label: 'Main Page',
     defaultTitle: 'Home',
     defaultSlug: 'home',
     description: 'Home page template for your site',
-    metaBlocks: {
-        metaDataBlock,
-        thumbnailCardBlock,
-        navigationEntryBlock,
+    dataFields: {
+        description,
+        robots,
+        follow
     },
-    bodyBlocks: {
-        mainPageHeroBlock,
-        headerBlock,
-        paragraphBlock,
-        chapterBlock
-    }
+    documentAreas: {
+        linkBlocks: {
+            label: 'Link View',
+            indexNumber: 0,
+            blocks: {
+                navigationEntryBlock,
+            }
+        },
+        cardBlocks: {
+            label: 'Card View',
+            indexNumber: 1,
+            blocks:
+                {
+                    thumbnailCardBlock,
+                }
+        },
+        bodyBlocks: {
+            label: 'Body View',
+            indexNumber: 2,
+            blocks:
+                {
+                    mainPageHeroBlock,
+                    headerBlock,
+                    paragraphBlock,
+                    chapterBlock
+                }
+        }
+    },
+    commonAreas: {}
 };

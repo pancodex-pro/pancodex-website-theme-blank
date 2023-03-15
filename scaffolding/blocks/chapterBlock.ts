@@ -1,7 +1,6 @@
 import {BlockConfig} from '@pancodex/sdk-lib';
-import {StringSelectsKeys, TextConstantsKeys} from '../keyValues';
 
-export const chapterBlock: BlockConfig<StringSelectsKeys, TextConstantsKeys> = {
+export const chapterBlock: BlockConfig = {
     description: 'A chapter of the article with header and paragraphs',
         components: {
         headerComponent: {

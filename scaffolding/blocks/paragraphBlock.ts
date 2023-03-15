@@ -1,17 +1,16 @@
 import {BlockConfig} from '@pancodex/sdk-lib';
-import {StringSelectsKeys, TextConstantsKeys} from '../keyValues';
 
-export const paragraphBlock: BlockConfig<StringSelectsKeys, TextConstantsKeys> = {
+export const paragraphBlock: BlockConfig = {
     description: 'A simple text paragraph',
-        components: {
+    components: {
         paragraphComponent: {
             indexNumber: 0,
-                label: 'Paragraph',
-                props: {
+            label: 'Paragraph',
+            props: {
                 text: {
                     indexNumber: 0,
-                        type: 'ParagraphText',
-                        fieldContent: {
+                    type: 'ParagraphText',
+                    fieldContent: {
                         htmlText: '<p>Type the header here...</p>'
                     }
                 }

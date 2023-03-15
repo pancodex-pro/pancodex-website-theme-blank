@@ -1,19 +1,19 @@
 import React from 'react';
 import {Head} from '@pancodex/platform-lib';
-import {MainPage_MetaDataBlock} from '../adapters';
+import {MainPage_DataFields} from '../adapters';
 
 interface MetaDataProps {
-    metaDataBlock: MainPage_MetaDataBlock;
+    dataFields: MainPage_DataFields;
 }
 
 export function MetaDataBlock(props: MetaDataProps) {
-    const {metaDataBlock: {requiredMetaData}} = props;
-    const {description, follow, robots} = requiredMetaData;
+    const {dataFields} = props;
+    const {description, follow, robots} = dataFields;
     return (
         <Head>
-            <meta name="description" content={description.value as string}/>
+            <meta name="description" content={description?.value as string}/>
             {/* Open Graph Data */}
-            <meta property="og:description" content={description.value} />
+            <meta property="og:description" content={description?.value} />
             {/*<meta property="og:locale" content={locale as string}/>*/}
             {/*<meta property="og:locale:alternate" content={locale} />*/}
             {/*<meta property="og:locale:alternate" content={locale} />*/}

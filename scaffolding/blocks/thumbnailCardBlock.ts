@@ -1,7 +1,7 @@
 import {BlockConfig} from '@pancodex/sdk-lib';
-import {StringSelectsKeys, TextConstantsKeys} from '../keyValues';
 
-export const thumbnailCardBlock: BlockConfig<StringSelectsKeys, TextConstantsKeys> = {
+export const thumbnailCardBlock: BlockConfig = {
+    isDefault: true,
     description: 'A card layout to display the page\'s thumbnail',
     components: {
         thumbnailCardComponent: {
